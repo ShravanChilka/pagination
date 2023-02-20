@@ -58,7 +58,16 @@ class _PaginationListViewState<T> extends State<PaginationListView<T>> {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return widget.errorWidget ??
-              Center(child: Text(snapshot.error.toString()));
+              Center(
+                  child: Column(
+                children: [
+                  Text(snapshot.error.toString()),
+                  TextButton(
+                    onPressed: () => setState(() {}),
+                    child: const Text('Retry'),
+                  )
+                ],
+              ));
         } else if (snapshot.hasData) {
           if (snapshot.connectionState == ConnectionState.done) {
             _isLoadingMore = false;
